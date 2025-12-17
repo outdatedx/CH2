@@ -1,0 +1,92 @@
+
+
+
+@font-face {
+  font-family: Jost;
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("//chapter2drip.com/cdn/fonts/jost/jost_n7.921dc18c13fa0b0c94c5e2517ffe06139c3615a3.woff2?h1=ZTM2OTQ5LWIzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=Y2hhcHRlci0yLTY5ZWQzMzc3MDQyY2QxNzgzYjMxLm8yLm15c2hvcGlmeS5kZXY&h3=Y2hhcHRlcjJkcmlwLmNvbQ&h4=Y2hlY2tvdXQuY2hhcHRlcjJkcmlwLmNvbQ&hmac=17a649d9df17442474e32a296fc904a6cac976dddd7aeeda43dd1a90cf70c0af") format("woff2"),
+       url("//chapter2drip.com/cdn/fonts/jost/jost_n7.cbfc16c98c1e195f46c536e775e4e959c5f2f22b.woff?h1=ZTM2OTQ5LWIzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=Y2hhcHRlci0yLTY5ZWQzMzc3MDQyY2QxNzgzYjMxLm8yLm15c2hvcGlmeS5kZXY&h3=Y2hhcHRlcjJkcmlwLmNvbQ&h4=Y2hlY2tvdXQuY2hhcHRlcjJkcmlwLmNvbQ&hmac=7444829e8e74544b73cbeea80bf7bea64bc82cfc1d9379cdf87524a6aafdecbd") format("woff");
+}
+
+@font-face {
+  font-family: Poppins;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("//chapter2drip.com/cdn/fonts/poppins/poppins_n4.0ba78fa5af9b0e1a374041b3ceaadf0a43b41362.woff2?h1=ZTM2OTQ5LWIzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=Y2hhcHRlci0yLTY5ZWQzMzc3MDQyY2QxNzgzYjMxLm8yLm15c2hvcGlmeS5kZXY&h3=Y2hhcHRlcjJkcmlwLmNvbQ&h4=Y2hlY2tvdXQuY2hhcHRlcjJkcmlwLmNvbQ&hmac=69abc7c7e0b9d4f6a0aaa9ddea14fb44f1e3e9b72b99e42fb324e1f28ae9afaa") format("woff2"),
+       url("//chapter2drip.com/cdn/fonts/poppins/poppins_n4.214741a72ff2596839fc9760ee7a770386cf16ca.woff?h1=ZTM2OTQ5LWIzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=Y2hhcHRlci0yLTY5ZWQzMzc3MDQyY2QxNzgzYjMxLm8yLm15c2hvcGlmeS5kZXY&h3=Y2hhcHRlcjJkcmlwLmNvbQ&h4=Y2hlY2tvdXQuY2hhcHRlcjJkcmlwLmNvbQ&hmac=ed64b0df72fbb823ddc3ffacb87de4af59bf64c329ba7d05ab160576ec34de3c") format("woff");
+}
+
+@font-face {
+  font-family: Poppins;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("//chapter2drip.com/cdn/fonts/poppins/poppins_n4.0ba78fa5af9b0e1a374041b3ceaadf0a43b41362.woff2?h1=ZTM2OTQ5LWIzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=Y2hhcHRlci0yLTY5ZWQzMzc3MDQyY2QxNzgzYjMxLm8yLm15c2hvcGlmeS5kZXY&h3=Y2hhcHRlcjJkcmlwLmNvbQ&h4=Y2hlY2tvdXQuY2hhcHRlcjJkcmlwLmNvbQ&hmac=69abc7c7e0b9d4f6a0aaa9ddea14fb44f1e3e9b72b99e42fb324e1f28ae9afaa") format("woff2"),
+       url("//chapter2drip.com/cdn/fonts/poppins/poppins_n4.214741a72ff2596839fc9760ee7a770386cf16ca.woff?h1=ZTM2OTQ5LWIzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=Y2hhcHRlci0yLTY5ZWQzMzc3MDQyY2QxNzgzYjMxLm8yLm15c2hvcGlmeS5kZXY&h3=Y2hhcHRlcjJkcmlwLmNvbQ&h4=Y2hlY2tvdXQuY2hhcHRlcjJkcmlwLmNvbQ&hmac=ed64b0df72fbb823ddc3ffacb87de4af59bf64c329ba7d05ab160576ec34de3c") format("woff");
+}
+
+
+
+  @font-face {
+  font-family: Jost;
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+  src: url("//chapter2drip.com/cdn/fonts/jost/jost_n8.3cf5e98b5ecbf822f9fccf0e49e49a03e21bd8ac.woff2?h1=ZTM2OTQ5LWIzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=Y2hhcHRlci0yLTY5ZWQzMzc3MDQyY2QxNzgzYjMxLm8yLm15c2hvcGlmeS5kZXY&h3=Y2hhcHRlcjJkcmlwLmNvbQ&h4=Y2hlY2tvdXQuY2hhcHRlcjJkcmlwLmNvbQ&hmac=47486c032bb31ae35812c370839bff1381cdc6e473a9459770cdbaa04a855600") format("woff2"),
+       url("//chapter2drip.com/cdn/fonts/jost/jost_n8.dbe90b7c788249ac8931bcf34b35a1a9cdfaf184.woff?h1=ZTM2OTQ5LWIzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=Y2hhcHRlci0yLTY5ZWQzMzc3MDQyY2QxNzgzYjMxLm8yLm15c2hvcGlmeS5kZXY&h3=Y2hhcHRlcjJkcmlwLmNvbQ&h4=Y2hlY2tvdXQuY2hhcHRlcjJkcmlwLmNvbQ&hmac=452fab11cc5855f0bfb5a26936edf63b4db69e8ff5423f6059a3ba541d04f9ea") format("woff");
+}
+
+
+
+
+  @font-face {
+  font-family: Poppins;
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url("//chapter2drip.com/cdn/fonts/poppins/poppins_n5.ad5b4b72b59a00358afc706450c864c3c8323842.woff2?h1=ZTM2OTQ5LWIzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=Y2hhcHRlci0yLTY5ZWQzMzc3MDQyY2QxNzgzYjMxLm8yLm15c2hvcGlmeS5kZXY&h3=Y2hhcHRlcjJkcmlwLmNvbQ&h4=Y2hlY2tvdXQuY2hhcHRlcjJkcmlwLmNvbQ&hmac=de9ff2109bb60ec3ea7751602fee6c1ace0a5e9549e342e33502407092a373a6") format("woff2"),
+       url("//chapter2drip.com/cdn/fonts/poppins/poppins_n5.33757fdf985af2d24b32fcd84c9a09224d4b2c39.woff?h1=ZTM2OTQ5LWIzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=Y2hhcHRlci0yLTY5ZWQzMzc3MDQyY2QxNzgzYjMxLm8yLm15c2hvcGlmeS5kZXY&h3=Y2hhcHRlcjJkcmlwLmNvbQ&h4=Y2hlY2tvdXQuY2hhcHRlcjJkcmlwLmNvbQ&hmac=02860ca31ad9d581cd419f30d0971492135ee2b4d143f664ac1c2baed8167e11") format("woff");
+}
+
+
+
+
+  @font-face {
+  font-family: Poppins;
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url("//chapter2drip.com/cdn/fonts/poppins/poppins_n5.ad5b4b72b59a00358afc706450c864c3c8323842.woff2?h1=ZTM2OTQ5LWIzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=Y2hhcHRlci0yLTY5ZWQzMzc3MDQyY2QxNzgzYjMxLm8yLm15c2hvcGlmeS5kZXY&h3=Y2hhcHRlcjJkcmlwLmNvbQ&h4=Y2hlY2tvdXQuY2hhcHRlcjJkcmlwLmNvbQ&hmac=de9ff2109bb60ec3ea7751602fee6c1ace0a5e9549e342e33502407092a373a6") format("woff2"),
+       url("//chapter2drip.com/cdn/fonts/poppins/poppins_n5.33757fdf985af2d24b32fcd84c9a09224d4b2c39.woff?h1=ZTM2OTQ5LWIzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=Y2hhcHRlci0yLTY5ZWQzMzc3MDQyY2QxNzgzYjMxLm8yLm15c2hvcGlmeS5kZXY&h3=Y2hhcHRlcjJkcmlwLmNvbQ&h4=Y2hlY2tvdXQuY2hhcHRlcjJkcmlwLmNvbQ&hmac=02860ca31ad9d581cd419f30d0971492135ee2b4d143f664ac1c2baed8167e11") format("woff");
+}
+
+
+
+
+
+
+
+  @font-face {
+  font-family: Poppins;
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: url("//chapter2drip.com/cdn/fonts/poppins/poppins_i4.846ad1e22474f856bd6b81ba4585a60799a9f5d2.woff2?h1=ZTM2OTQ5LWIzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=Y2hhcHRlci0yLTY5ZWQzMzc3MDQyY2QxNzgzYjMxLm8yLm15c2hvcGlmeS5kZXY&h3=Y2hhcHRlcjJkcmlwLmNvbQ&h4=Y2hlY2tvdXQuY2hhcHRlcjJkcmlwLmNvbQ&hmac=80f5e8a79f6675c61db82342a9cec93e9361bb82c0122a63a02ff64ea5c36a19") format("woff2"),
+       url("//chapter2drip.com/cdn/fonts/poppins/poppins_i4.56b43284e8b52fc64c1fd271f289a39e8477e9ec.woff?h1=ZTM2OTQ5LWIzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=Y2hhcHRlci0yLTY5ZWQzMzc3MDQyY2QxNzgzYjMxLm8yLm15c2hvcGlmeS5kZXY&h3=Y2hhcHRlcjJkcmlwLmNvbQ&h4=Y2hlY2tvdXQuY2hhcHRlcjJkcmlwLmNvbQ&hmac=477a9267908dedbb994f7e6fd8dc58d6182f8c563957ea657a12c35c0263cacd") format("woff");
+}
+
+
+
+  @font-face {
+  font-family: Poppins;
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+  src: url("//chapter2drip.com/cdn/fonts/poppins/poppins_i5.6acfce842c096080e34792078ef3cb7c3aad24d4.woff2?h1=ZTM2OTQ5LWIzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=Y2hhcHRlci0yLTY5ZWQzMzc3MDQyY2QxNzgzYjMxLm8yLm15c2hvcGlmeS5kZXY&h3=Y2hhcHRlcjJkcmlwLmNvbQ&h4=Y2hlY2tvdXQuY2hhcHRlcjJkcmlwLmNvbQ&hmac=c7d1f204b2ca6a81162025093b81286b094443ad2bbeb644e4120a5929bb497a") format("woff2"),
+       url("//chapter2drip.com/cdn/fonts/poppins/poppins_i5.a49113e4fe0ad7fd7716bd237f1602cbec299b3c.woff?h1=ZTM2OTQ5LWIzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=Y2hhcHRlci0yLTY5ZWQzMzc3MDQyY2QxNzgzYjMxLm8yLm15c2hvcGlmeS5kZXY&h3=Y2hhcHRlcjJkcmlwLmNvbQ&h4=Y2hlY2tvdXQuY2hhcHRlcjJkcmlwLmNvbQ&hmac=c6621374087681e87d50883be7c1b3ddfdd48b35c5d645cb82eb642f0719c33e") format("woff");
+}
+
+

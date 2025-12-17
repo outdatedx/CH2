@@ -1,0 +1,336 @@
+<div class="{% if section.settings.slider == false %}slider_block {% endif %}image_look_blocks {{ section.id }}" style="{% if section.settings.look_block_back_img != blank %}background-image:url({{ section.settings.look_block_back_img | img_url:'master' }});{% else %}background-color:{{ section.settings.look_block_back_clr }};{% endif %}">
+  <div class="wrapper section-padding">
+    <div class="image_look_blocks_data{% if section.settings.overlap_content %} overlap_content_container{% endif %}">
+      <h2 class="look_block_heading kicker-flourished" style="color:{{ section.settings.look_block_heading_clr }};">{{ section.settings.look_block_heading }}</h2>
+      <p class="look_block_richtext">{{ section.settings.look_block_richtext }}</p>
+      <div class="image_look_blocks_container">
+        {% if section.settings.by_metafield %}
+          {% if product.metafields.custom.video_1 != blank %}
+            <div class="image_look_block">
+              <div class="image_look_block_container">
+                <div class="image_look_blocks_img">
+                  <video autoplay muted loop>
+                    <source src="{{ product.metafields.custom.video_1 | file_url }}" type="video/mp4">
+                  </video>
+                </div>
+                {% assign product_1 = product.metafields.custom.product_video_1.value %}
+                {% if product_1 != blank %}
+                  <div class="video_slider_content">
+                    <a href="{{ product_1.url }}" class="vdo_slide_product">
+                      <div class="vdo_slide_product_img">
+                        <img src="{{ product_1.featured_image | img_url:'master' }}">
+                      </div>
+                      <div class="vdo_slide_product_info">
+                        <h5 class="vdo_slide_product_title">{{ product_1.title }}</h5>
+                        <p class="vdo_slide_product_price">{{ product_1.price | money_with_currency }}</p>
+                      </div>
+                    </a>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+          {% if product.metafields.custom.video_2 != blank %}
+            <div class="image_look_block">
+              <div class="image_look_block_container">
+                <div class="image_look_blocks_img">
+                  <video autoplay muted loop>
+                    <source src="{{ product.metafields.custom.video_2 | file_url }}" type="video/mp4">
+                  </video>
+                </div>
+                {% assign product_2 = product.metafields.custom.product_video_2.value %}
+                {% if product_2 != blank %}
+                  <div class="video_slider_content">
+                    <a href="{{ product_2.url }}" class="vdo_slide_product">
+                      <div class="vdo_slide_product_img">
+                        <img src="{{ product_2.featured_image | img_url:'master' }}">
+                      </div>
+                      <div class="vdo_slide_product_info">
+                        <h5 class="vdo_slide_product_title">{{ product_2.title }}</h5>
+                        <p class="vdo_slide_product_price">{{ product_2.price | money_with_currency }}</p>
+                      </div>
+                    </a>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+          {% if product.metafields.custom.video_3 != blank %}
+            <div class="image_look_block">
+              <div class="image_look_block_container">
+                <div class="image_look_blocks_img">
+                  <video autoplay muted loop>
+                    <source src="{{ product.metafields.custom.video_3 | file_url }}" type="video/mp4">
+                  </video>
+                </div>
+                {% assign product_3 = product.metafields.custom.product_video_3.value %}
+                {% if product_3 != blank %}
+                  <div class="video_slider_content">
+                    <a href="{{ product_3.url }}" class="vdo_slide_product">
+                      <div class="vdo_slide_product_img">
+                        <img src="{{ product_3.featured_image | img_url:'master' }}">
+                      </div>
+                      <div class="vdo_slide_product_info">
+                        <h5 class="vdo_slide_product_title">{{ product.metafields.custom.product_title_1 }}</h5>
+                        <!-- <p class="vdo_slide_product_price">{{ product_3.price | money_with_currency }}</p> -->
+                      </div>
+                    </a>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+          {% if product.metafields.custom.video_4 != blank %}
+            <div class="image_look_block">
+              <div class="image_look_block_container">
+                <div class="image_look_blocks_img">
+                  <video autoplay muted loop>
+                    <source src="{{ product.metafields.custom.video_4 | file_url }}" type="video/mp4">
+                  </video>
+                </div>
+                {% assign product_4 = product.metafields.custom.product_video_4.value %}
+                {% if product_4 != blank %}
+                  <div class="video_slider_content">
+                    <a href="{{ product_4.url }}" class="vdo_slide_product">
+                      <div class="vdo_slide_product_img">
+                        <img src="{{ product_4.featured_image | img_url:'master' }}">
+                      </div>
+                      <div class="vdo_slide_product_info">
+                        <h5 class="vdo_slide_product_title">{{ product_4.title }}</h5>
+                        <p class="vdo_slide_product_price">{{ product_4.price | money_with_currency }}</p>
+                      </div>
+                    </a>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+        {% else %}
+          {% for block in section.blocks %}
+            <div class="image_look_block">
+              <div class="image_look_block_container">
+                <div class="image_look_blocks_img">
+                  {% if block.settings.image_look_blocks_img != blank or block.settings.image_look_blocks_video != blank %}
+                    {% if block.settings.grid_btn_url != blank %}
+                      <a href="{{ block.settings.grid_btn_url }}">
+                    {% endif %}
+                      {% if block.settings.image_look_blocks_video != blank %}
+                          {{ block.settings.image_look_blocks_video | video_tag: image_size: '1100x', autoplay: true, loop: true, controls: false, muted: true }}
+                      {% else %}
+                        <img src="{{ block.settings.image_look_blocks_img | img_url:"master" }}">
+                      {% endif %}
+                    {% if block.settings.grid_btn_url != blank %}
+                      </a>
+                    {% endif %}
+                  {% endif %}
+                </div>
+                {% if block.settings.image_look_blocks_video != blank %}
+                  {% assign product = block.settings.product %}
+                  <div class="video_slider_content">
+                    {% if block.settings.product != blank %}
+                      <a href="{{ product.url }}" class="vdo_slide_product">
+                        <div class="vdo_slide_product_img">
+                          <img src="{{ product.featured_image | img_url:'master' }}">
+                        </div>
+                        <div class="vdo_slide_product_info">
+                          <h5 class="vdo_slide_product_title">{{ product.title }}</h5>
+                          <p class="vdo_slide_product_price">{{ product.price | money_with_currency }}</p>
+                        </div>
+                      </a>
+                    {% endif %}
+                  </div>
+                {% else %}
+                  {% if section.settings.overlap_btn %}
+                    <div class="overlap_btn">
+                      <h4 class="image_look_block_title">{{ block.settings.image_look_block_title }}</h4>
+                    </div>
+                  {% elsif section.settings.overlap_content %}
+                    <div class="overlap_content">
+                      {% if block.settings.image_look_block_title != blank %}
+                        <h4 class="image_look_block_title">{{ block.settings.image_look_block_title }}</h4>
+                      {% endif %}
+                      {% if block.settings.grid_btn_text != blank %}
+                        <a class="image_look_block_btn button btn" href="{{ block.settings.grid_btn_url }}">{{ block.settings.grid_btn_text }}</a>
+                      {% endif %}
+                    </div>
+                  {% else %}
+                    {% if block.settings.image_look_block_title != blank %}
+                      <h4 class="image_look_block_title">{{ block.settings.image_look_block_title }}</h4>
+                    {% endif %}
+                    {% if block.settings.grid_btn_text != blank %}
+                      <a class="image_look_block_btn button btn" href="{{ block.settings.grid_btn_url }}">{{ block.settings.grid_btn_text }}</a>
+                    {% endif %}
+                  {% endif %}
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+        {% if section.settings.image_look_blocks_btn %}
+          <div class="image_look_blocks_btn">
+            <a class="button" href="{{ section.settings.image_look_blocks_btn_link }}">View All</a>
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  {% if section.settings.slider %}
+    $('.{{ section.id }} .image_look_blocks_container').slick({
+      dots: true,
+      arrows: true,
+      infinite: false,
+      speed: 300,
+      slidesToShow: {{ section.settings.desktop_slide_column }},
+      slidesToScroll: 1,
+      prevArrow:"<button type='button' class='slick_button slick-prev'><svg height='1792' viewBox='0 0 1792 1792' width='1792' xmlns='http://www.w3.org/2000/svg'><path d='M1203 544q0 13-10 23l-393 393 393 393q10 10 10 23t-10 23l-50 50q-10 10-23 10t-23-10l-466-466q-10-10-10-23t10-23l466-466q10-10 23-10t23 10l50 50q10 10 10 23z'/></svg></button>",
+      nextArrow:"<button type='button' class='slick_button slick-next'><svg height='1792' viewBox='0 0 1792 1792' width='1792' xmlns='http://www.w3.org/2000/svg'><path d='M1171 960q0 13-10 23l-466 466q-10 10-23 10t-23-10l-50-50q-10-10-10-23t10-23l393-393-393-393q-10-10-10-23t10-23l50-50q10-10 23-10t23 10l466 466q10 10 10 23z'/></svg></button>",
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: {{ section.settings.mobile_slide_column }},
+            slidesToScroll: 1,
+            arrows: false,
+            fade: {{ section.settings.slider_fade }},
+            speed: 500,
+            // dots: {% if section.settings.slider_fade == true %}false{% else %}true{% endif %}
+          }
+        }
+      ]
+    });
+  {% endif %}
+</script>
+
+{% schema %}
+  {
+    "name": "Reels",
+    "settings": [
+      {
+        "type": "text",
+        "id": "look_block_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "color",
+        "id": "look_block_heading_clr",
+        "label": "Heading Color"
+      },
+      {
+        "type": "image_picker",
+        "id": "look_block_back_img",
+        "label": "Background Image"
+      },
+      {
+        "type": "color",
+        "id": "look_block_back_clr",
+        "label": "Background Color"
+      },
+      {
+        "type": "text",
+        "id": "look_block_richtext",
+        "label": "Richtext"
+      },
+      {
+        "type": "checkbox",
+        "id": "by_metafield",
+        "label": "Metafield Video",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "overlap_content",
+        "label": "Overlap Content",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "overlap_btn",
+        "label": "Overlap Button",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "image_look_blocks_btn",
+        "label": "View All Button",
+        "default": false
+      },
+      {
+        "type": "url",
+        "id": "image_look_blocks_btn_link",
+        "label": "Button Link"
+      },
+      {
+        "type": "checkbox",
+        "id": "slider",
+        "label": "Slider",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "desktop_slide_column",
+        "label": "Desktop Slider Column",
+        "default":"4"
+      },
+      {
+        "type": "text",
+        "id": "mobile_slide_column",
+        "label": "Mobile Slider Column",
+        "default":"2.2"
+      },
+      {
+        "type": "checkbox",
+        "id": "slider_fade",
+        "label": "Slider Fade",
+        "default": false
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "video",
+            "id": "image_look_blocks_video",
+            "label": "Video"
+          },
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_look_blocks_img",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "image_look_block_title",
+            "label": "Image Title"
+          },
+          {
+            "type": "text",
+            "id": "grid_btn_text",
+            "label": "Button Text"
+          },
+          {
+            "type": "url",
+            "id": "grid_btn_url",
+            "label": "Button Link"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Reels"
+      }
+    ]
+  }
+{% endschema %}

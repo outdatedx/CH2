@@ -1,0 +1,93 @@
+<!-- /snippets/product-size-and-remaining.liquid -->
+
+{%- assign size_chart_file = product.metafields.custom.size_chart -%}
+{%- assign size_chart_title = block.settings.title | default: 'Size Chart' -%}
+{%- assign action_style = 'product__info__link' -%}
+
+{%- capture size_chart -%}
+  {%- if size_chart_file != blank -%}
+    <a href="#" class="{{ action_style }}" data-popup-{{ section.id }}="size-{{ section.id }}">
+      {{ size_chart_title }}
+    </a>
+    <div class="modal micromodal-slide" id="size-{{ section.id }}" data-modal aria-hidden="true">
+      <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <button data-micromodal-close class="modal__close" aria-label="{{ 'general.accessibility.close' | t }}"></button>
+        <div class="modal__container modal__container--inline"
+          data-modal-content
+          role="dialog"
+          aria-modal="true"
+          aria-label="{{ size_chart_title | strip_html | escape }}">
+          <div class="rte" style="text-align: center;">
+            <img
+              src="{{ size_chart_file | file_url }}"
+              alt="{{ size_chart_title }}"
+              style="max-width: 100%; height: auto;"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endcapture -%}
+
+{% comment %} Preorder products show a variant countdown but not sold out or in stock states {% endcomment %}
+{%- if product.metafields.theme.preorder.value == true -%}
+  {% assign is_preorder = true %}
+{% endif %}
+
+<div class="product__block__remaining" style="--PB: {{ block.settings.padding_bottom }}px;" {{ block.shopify_attributes }}>
+  {%- if block.settings.show_remaining or size_chart_file != blank -%}
+    {%- assign packed_class = '' -%}
+    {%- if block.settings.show_remaining and size_chart_file != blank -%}
+      {%- assign packed_class = 'product__button__meta--packed' -%}
+    {%- endif -%}
+    <div class="product__button__meta {{ packed_class }}">
+      {%- if size_chart_file != blank -%}
+        {{ size_chart }}
+      {%- endif -%}
+
+      {%- if block.settings.show_remaining -%}
+        {%- assign max_inventory = block.settings.countdown -%}
+        {%- assign show_remaining_class = 'count-is-unavailable' -%}
+        {%- assign current_inventory = 0 -%}
+
+        {%- if current_variant.inventory_policy == 'deny' and current_variant.inventory_management -%}
+          {%- if current_variant.inventory_quantity > 0 and current_variant.inventory_quantity <= max_inventory -%}
+            {%- assign show_remaining_class = 'count-is-low' -%}
+            {%- assign current_inventory = current_variant.inventory_quantity -%}
+          {%- elsif current_variant.inventory_quantity > 0 and current_variant.inventory_quantity > max_inventory -%}
+            {%- assign show_remaining_class = 'count-is-in' -%}
+          {%- else -%}
+            {%- assign show_remaining_class = 'count-is-out' -%}
+          {%- endif -%}
+        {%- else -%}
+          {%- assign show_remaining_class = 'count-is-unavailable' -%}
+        {%- endif -%}
+
+        {%- capture inventory -%}
+          <span data-remaining-max="{{ max_inventory }}" data-remaining-count>{{ current_inventory | default: 0 }} </span>
+        {%- endcapture -%}
+
+        <p class="variant__countdown {{ show_remaining_class }}{% if block.settings.show_remaining_style == 'low' or is_preorder %} show-only-low{% endif %}" data-remaining-wrapper>
+          <span class="variant__countdown--in">{{ 'products.product.in_stock' | t }}</span>
+          <span class="variant__countdown--low">{{ 'products.product.remaining_html' | t: inventory: inventory }}</span>
+          <span class="variant__countdown--out">{{ 'products.product.out_of_stock' | t }}</span>
+          <span class="variant__countdown--unavailable">{{ 'products.product.item_unavailable' | t }}</span>
+        </p>
+
+        <script data-product-remaining-json type="application/json">
+          {
+            {%- for variant in product.variants -%}
+              {%- assign maximum = block.settings.countdown | plus: 1 -%}
+              {%- assign quant = null -%}
+              {%- if variant.inventory_policy == 'deny' and variant.inventory_management -%}
+                {%- assign quant = variant.inventory_quantity | at_most: maximum -%}
+              {%- endif -%}
+              "{{ variant.id | json }}": "{{ quant | json }}"{%- unless forloop.last -%},{%- endunless -%}
+            {%- endfor -%}
+          }
+        </script>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
