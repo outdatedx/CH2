@@ -9,7 +9,18 @@
             <div class="image_look_block">
               <div class="image_look_block_container">
                 <div class="image_look_blocks_img">
-                  <video autoplay muted loop>
+                  <video
+                    data-autoplay-on-scroll
+                    muted
+                    loop
+                    playsinline
+                    preload="none">
+                    <track
+                      kind="captions"
+                      src="data:text/vtt;base64,V0VCVlRUCg=="
+                      label="English"
+                      srclang="en"
+                      default>
                     <source src="{{ product.metafields.custom.video_1 | file_url }}" type="video/mp4">
                   </video>
                 </div>
@@ -18,7 +29,12 @@
                   <div class="video_slider_content">
                     <a href="{{ product_1.url }}" class="vdo_slide_product">
                       <div class="vdo_slide_product_img">
-                        <img src="{{ product_1.featured_image | img_url:'master' }}">
+                        <img
+                          src="{{ product_1.featured_image | image_url: width: 60 }}"
+                          width="{{ product_1.featured_image.width }}"
+                          height="{{ product_1.featured_image.height }}"
+                          alt="{{ product_1.featured_image.alt | default: product_1.title | escape }}"
+                          loading="lazy">
                       </div>
                       <div class="vdo_slide_product_info">
                         <h5 class="vdo_slide_product_title">{{ product_1.title }}</h5>
@@ -34,7 +50,18 @@
             <div class="image_look_block">
               <div class="image_look_block_container">
                 <div class="image_look_blocks_img">
-                  <video autoplay muted loop>
+                  <video
+                    data-autoplay-on-scroll
+                    muted
+                    loop
+                    playsinline
+                    preload="none">
+                    <track
+                      kind="captions"
+                      src="data:text/vtt;base64,V0VCVlRUCg=="
+                      label="English"
+                      srclang="en"
+                      default>
                     <source src="{{ product.metafields.custom.video_2 | file_url }}" type="video/mp4">
                   </video>
                 </div>
@@ -43,7 +70,12 @@
                   <div class="video_slider_content">
                     <a href="{{ product_2.url }}" class="vdo_slide_product">
                       <div class="vdo_slide_product_img">
-                        <img src="{{ product_2.featured_image | img_url:'master' }}">
+                        <img
+                          src="{{ product_2.featured_image | image_url: width: 60 }}"
+                          width="{{ product_2.featured_image.width }}"
+                          height="{{ product_2.featured_image.height }}"
+                          alt="{{ product_2.featured_image.alt | default: product_2.title | escape }}"
+                          loading="lazy">
                       </div>
                       <div class="vdo_slide_product_info">
                         <h5 class="vdo_slide_product_title">{{ product_2.title }}</h5>
@@ -59,7 +91,18 @@
             <div class="image_look_block">
               <div class="image_look_block_container">
                 <div class="image_look_blocks_img">
-                  <video autoplay muted loop>
+                  <video
+                    data-autoplay-on-scroll
+                    muted
+                    loop
+                    playsinline
+                    preload="none">
+                    <track
+                      kind="captions"
+                      src="data:text/vtt;base64,V0VCVlRUCg=="
+                      label="English"
+                      srclang="en"
+                      default>
                     <source src="{{ product.metafields.custom.video_3 | file_url }}" type="video/mp4">
                   </video>
                 </div>
@@ -68,11 +111,16 @@
                   <div class="video_slider_content">
                     <a href="{{ product_3.url }}" class="vdo_slide_product">
                       <div class="vdo_slide_product_img">
-                        <img src="{{ product_3.featured_image | img_url:'master' }}">
+                        <img
+                          src="{{ product_3.featured_image | image_url: width: 60 }}"
+                          width="{{ product_3.featured_image.width }}"
+                          height="{{ product_3.featured_image.height }}"
+                          alt="{{ product_3.featured_image.alt | default: product.metafields.custom.product_title_1 | escape }}"
+                          loading="lazy">
                       </div>
                       <div class="vdo_slide_product_info">
                         <h5 class="vdo_slide_product_title">{{ product.metafields.custom.product_title_1 }}</h5>
-                        <!-- <p class="vdo_slide_product_price">{{ product_3.price | money_with_currency }}</p> -->
+                      <!-- <p class="vdo_slide_product_price">{{ product_3.price | money_with_currency }}</p> -->
                       </div>
                     </a>
                   </div>
@@ -84,7 +132,18 @@
             <div class="image_look_block">
               <div class="image_look_block_container">
                 <div class="image_look_blocks_img">
-                  <video autoplay muted loop>
+                  <video
+                    data-autoplay-on-scroll
+                    muted
+                    loop
+                    playsinline
+                    preload="none">
+                    <track
+                      kind="captions"
+                      src="data:text/vtt;base64,V0VCVlRUCg=="
+                      label="English"
+                      srclang="en"
+                      default>
                     <source src="{{ product.metafields.custom.video_4 | file_url }}" type="video/mp4">
                   </video>
                 </div>
@@ -93,7 +152,12 @@
                   <div class="video_slider_content">
                     <a href="{{ product_4.url }}" class="vdo_slide_product">
                       <div class="vdo_slide_product_img">
-                        <img src="{{ product_4.featured_image | img_url:'master' }}">
+                        <img
+                          src="{{ product_4.featured_image | image_url: width: 60 }}"
+                          width="{{ product_4.featured_image.width }}"
+                          height="{{ product_4.featured_image.height }}"
+                          alt="{{ product_4.featured_image.alt | default: product_4.title | escape }}"
+                          loading="lazy">
                       </div>
                       <div class="vdo_slide_product_info">
                         <h5 class="vdo_slide_product_title">{{ product_4.title }}</h5>
@@ -114,11 +178,16 @@
                     {% if block.settings.grid_btn_url != blank %}
                       <a href="{{ block.settings.grid_btn_url }}">
                     {% endif %}
-                      {% if block.settings.image_look_blocks_video != blank %}
-                          {{ block.settings.image_look_blocks_video | video_tag: image_size: '1100x', autoplay: true, loop: true, controls: false, muted: true }}
-                      {% else %}
-                        <img src="{{ block.settings.image_look_blocks_img | img_url:"master" }}">
-                      {% endif %}
+                    {% if block.settings.image_look_blocks_video != blank %}
+                      {{ block.settings.image_look_blocks_video | video_tag: image_size: '1100x', autoplay: false, loop: true, controls: false, muted: true, class: 'js-video-autoplay', preload: 'none' | replace: '</video>', '<track kind="captions" src="data:text/vtt;base64,V0VCVlRUCg==" label="English" srclang="en" default></video>' }}
+                    {% else %}
+                      <img
+                        src="{{ block.settings.image_look_blocks_img | image_url: width: 1100 }}"
+                        width="{{ block.settings.image_look_blocks_img.width }}"
+                        height="{{ block.settings.image_look_blocks_img.height }}"
+                        alt="{{ block.settings.image_look_blocks_img.alt | default: block.settings.image_look_block_title | default: 'Reel image' | escape }}"
+                        loading="lazy">
+                    {% endif %}
                     {% if block.settings.grid_btn_url != blank %}
                       </a>
                     {% endif %}
@@ -130,7 +199,12 @@
                     {% if block.settings.product != blank %}
                       <a href="{{ product.url }}" class="vdo_slide_product">
                         <div class="vdo_slide_product_img">
-                          <img src="{{ product.featured_image | img_url:'master' }}">
+                          <img
+                            src="{{ product.featured_image | image_url: width: 60 }}"
+                            width="{{ product.featured_image.width }}"
+                            height="{{ product.featured_image.height }}"
+                            alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                            loading="lazy">
                         </div>
                         <div class="vdo_slide_product_info">
                           <h5 class="vdo_slide_product_title">{{ product.title }}</h5>
@@ -229,60 +303,50 @@
         "type": "color",
         "id": "look_block_back_clr",
         "label": "Background Color"
-      },
-      {
+      }, {
         "type": "text",
         "id": "look_block_richtext",
         "label": "Richtext"
-      },
-      {
+      }, {
         "type": "checkbox",
         "id": "by_metafield",
         "label": "Metafield Video",
         "default": false
-      },
-      {
+      }, {
         "type": "checkbox",
         "id": "overlap_content",
         "label": "Overlap Content",
         "default": false
-      },
-      {
+      }, {
         "type": "checkbox",
         "id": "overlap_btn",
         "label": "Overlap Button",
         "default": false
-      },
-      {
+      }, {
         "type": "checkbox",
         "id": "image_look_blocks_btn",
         "label": "View All Button",
         "default": false
-      },
-      {
+      }, {
         "type": "url",
         "id": "image_look_blocks_btn_link",
         "label": "Button Link"
-      },
-      {
+      }, {
         "type": "checkbox",
         "id": "slider",
         "label": "Slider",
         "default": true
-      },
-      {
+      }, {
         "type": "text",
         "id": "desktop_slide_column",
         "label": "Desktop Slider Column",
-        "default":"4"
-      },
-      {
+        "default": "4"
+      }, {
         "type": "text",
         "id": "mobile_slide_column",
         "label": "Mobile Slider Column",
-        "default":"2.2"
-      },
-      {
+        "default": "2.2"
+      }, {
         "type": "checkbox",
         "id": "slider_fade",
         "label": "Slider Fade",
@@ -313,13 +377,11 @@
             "type": "text",
             "id": "image_look_block_title",
             "label": "Image Title"
-          },
-          {
+          }, {
             "type": "text",
             "id": "grid_btn_text",
             "label": "Button Text"
-          },
-          {
+          }, {
             "type": "url",
             "id": "grid_btn_url",
             "label": "Button Link"

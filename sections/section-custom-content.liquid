@@ -112,6 +112,7 @@
                         <div class="hero__cta__wrapper">
                           <a class="hero__btn {{ block.settings.button_style }} {{ block.settings.button_color }}"
                             href="{{ block.settings.link }}"
+                            aria-label="{{ block.settings.link_text }} - {{ block.settings.title | default: block.settings.link.object.title | default: 'more info' | strip_html | escape }}"
                             data-aos="hero"
                             data-aos-anchor="{{ animation_anchor }}"
                             data-aos-order="4">

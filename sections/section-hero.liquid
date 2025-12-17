@@ -57,13 +57,13 @@
                   {% unless block.settings.title == '' %}
                     {%- assign elements_counter = elements_counter | plus: 1 -%}
                     {% assign heading_size_class = block.settings.text_size | prepend: 'heading-size-' %}
-                    <div class="hero__title {{ heading_size_class }}"
+                    <h2 class="hero__title {{ heading_size_class }}"
                       data-aos="hero"
                       data-aos-anchor="{{ animation_anchor }}"
                       data-aos-order="{{ elements_counter }}"
                       {{ block.shopify_attributes }}>
-                      <p>{{ block.settings.title }}</p>
-                    </div>
+                      {{ block.settings.title }}
+                    </h2>
                   {% endunless %}
                 {% when 'text' %}
                   {% unless block.settings.richtext == '' %}
@@ -292,7 +292,7 @@
 			"label": "Overlay behind text only",
 			"default": false
 		},
-		{
+    {
 			"type": "checkbox",
 			"id": "preload_image",
 			"label": "Prioritize image load",

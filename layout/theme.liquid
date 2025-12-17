@@ -1,49 +1,68 @@
 <!doctype html>
 {% capture rtl_codes %},ar,arc,ckb,dv,fa,ha,he,khw,ks,ps,sd,ur,uz_AF,yi,{% endcapture %}
 {% assign is_code_separator = request.locale.iso_code | append: ',' | prepend: ',' %}
-{% assign is_rtl =  nil %}
+{% assign is_rtl = nil %}
 {% if rtl_codes contains is_code_separator %}
-  {% assign is_rtl =  true %}
+  {% assign is_rtl = true %}
 {% endif %}
-<html class="no-js" lang="{{ request.locale.iso_code }}" {% if is_rtl %} dir="rtl"{% endif %}>
+<html
+  class="no-js"
+  lang="{{ request.locale.iso_code }}"
+  {% if is_rtl %}
+  dir="rtl"
+  {% endif %}>
 
-{%- assign title_override = false -%}
-{%- assign default_description = false -%}
-<head>
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "smy68h3x4o");
-</script>
+  {%- assign title_override = false -%}
+  {%- assign default_description = false -%}
+    <head>
+    <script>
+        // Defer Microsoft Clarity until after page is interactive for better FCP
+        function loadClarity() {
+          (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "smy68h3x4o");
+        }
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(function() { loadClarity(); }, { timeout: 3000 });
+        } else {
+          window.addEventListener('load', function() { setTimeout(loadClarity, 1000); });
+        }
+    </script>
 
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="{{ settings.color_secondary }}">
-  {%- if canonical_url != blank -%}
-    <link rel="canonical" href="{{ canonical_url }}">
-  {%- endif -%}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="{{ settings.color_secondary }}">
+    {%- if canonical_url != blank -%}
+      <link rel="canonical" href="{{ canonical_url }}">
+    {%- endif -%}
 
-  <!-- ======================= Pipeline Theme V7.5.0 ========================= -->
+    <!-- ======================= Pipeline Theme V7.5.0 ========================= -->
 
-  <!-- Preloading ================================================================== -->
+    <!-- Preloading ================================================================== -->
+    {%- comment -%}
+      Removing unused preconnects and preloads to reduce network contention.
+      Fonts are loaded via font-settings.css and cdn.shopify.com is already handled.
+    {%- endcomment -%}
 
-  <link rel="preconnect" href="https://fonts.shopify.com" crossorigin>
-  <link rel="preload" href="{{ settings.font_body_family | font_url }}" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="{{ settings.font_heading_family | font_url }}" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="{{ settings.font_accent_family | font_url }}" as="font" type="font/woff2" crossorigin>
+    <!-- DNS prefetch for non-critical third-party domains -->
+    <link rel="dns-prefetch" href="https://www.clarity.ms">
+    <link rel="dns-prefetch" href="https://ajax.googleapis.com">
 
-  <!-- Title and description ================================================ -->
-  {%- if settings.favicon != blank -%}
-    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
-  {%- else -%}
-    <link rel="shortcut icon" href="data:;base64,iVBORw0KGgo=">
-  {%- endif -%}
+    <!-- Title and description ================================================ -->
+    {%- if settings.favicon != blank -%}
+      <link
+        rel="shortcut icon"
+        href="{{ settings.favicon | img_url: '32x32' }}"
+        type="image/png">
+    {%- else -%}
+      <link rel="shortcut icon" href="data:;base64,iVBORw0KGgo=">
+    {%- endif -%}
 
-  {% capture seo_title %}
+    {% capture seo_title %}
     {%- assign title_content = page_title -%}
     {% if title_override %}
       {%- assign title_content = title_override -%}
@@ -61,39 +80,53 @@
       &ndash; {{ shop.name }}
     {%- endunless -%}
   {% endcapture %}
-  <title>
-    {{ seo_title }}
-  </title>
+    <title>
+      {{ seo_title }}
+    </title>
 
-  {%- if page_description -%}
-    <meta name="description" content="{{ page_description | escape }}">
-  {% elsif default_description %}
-    <meta name="description" content="{{ default_description | escape }}">
-  {%- endif -%}
-
-  {%- render 'social-meta-tags' -%}
-
-  <!-- CSS ================================================================== -->
-
-  {{ 'font-settings.css' | asset_url | stylesheet_tag: preload: true }}
-
-  {% render 'css-variables' %}
-
-  {{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
-  {% comment %} {{ 'preloader.css' | asset_url | stylesheet_tag: preload: true }} {% endcomment %}
-
-  <script>
-    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
-
-    {% if settings.animations_scroll_enable %}
-      document.documentElement.classList.add('aos-initialized');
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% elsif default_description %}
+      <meta name="description" content="{{ default_description | escape }}">
     {%- endif -%}
 
-    let root = '{{ routes.root_url }}';
-    if (root[root.length - 1] !== '/') {
+    {%- render 'social-meta-tags' -%}
+
+    <!-- CSS ================================================================== -->
+
+    {{ 'font-settings.css' | asset_url | stylesheet_tag: preload: true }}
+
+    {% render 'css-variables' %}
+
+    {{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
+    {% comment %} {{ 'preloader.css' | asset_url | stylesheet_tag: preload: true }} {% endcomment %}
+
+    <style>
+      /* Accessibility: Ensure minimum touch target size */
+      @media (pointer: coarse) {
+        button,
+        .btn,
+        .header__icon,
+        .mobile-nav__item a,
+        .footer__link {
+          min-height: 44px;
+          min-width: 44px;
+        }
+      }
+    </style>
+
+    <script>
+          document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+
+          {% if settings.animations_scroll_enable %}
+      document.documentElement.classList.add('aos-initialized');
+          {%- endif -%}
+
+          let root = '{{ routes.root_url }}';
+          if (root[root.length - 1] !== '/') {
       root = `${root}/`;
-    }
-    var theme = {
+          }
+          var theme = {
       routes: {
         root_url: root,
         cart: '{{ routes.cart_url }}',
@@ -163,74 +196,70 @@
       moneyFormat: {{ shop.money_format | json }},
       shopCurrency: {{ shop.currency | json }},
       currencyCode: {{ cart.currency.iso_code | json }}
-    }
-    let windowInnerHeight = window.innerHeight;
-    document.documentElement.style.setProperty('--full-screen', `${windowInnerHeight}px`);
-    document.documentElement.style.setProperty('--three-quarters', `${windowInnerHeight * 0.75}px`);
-    document.documentElement.style.setProperty('--two-thirds', `${windowInnerHeight * 0.66}px`);
-    document.documentElement.style.setProperty('--one-half', `${windowInnerHeight * 0.5}px`);
-    document.documentElement.style.setProperty('--one-third', `${windowInnerHeight * 0.33}px`);
-    document.documentElement.style.setProperty('--one-fifth', `${windowInnerHeight * 0.2}px`);
+          }
+          let windowInnerHeight = window.innerHeight;
+          document.documentElement.style.setProperty('--full-screen', `${windowInnerHeight}px`);
+          document.documentElement.style.setProperty('--three-quarters', `${windowInnerHeight * 0.75}px`);
+          document.documentElement.style.setProperty('--two-thirds', `${windowInnerHeight * 0.66}px`);
+          document.documentElement.style.setProperty('--one-half', `${windowInnerHeight * 0.5}px`);
+          document.documentElement.style.setProperty('--one-third', `${windowInnerHeight * 0.33}px`);
+          document.documentElement.style.setProperty('--one-fifth', `${windowInnerHeight * 0.2}px`);
 
-    window.isRTL = document.documentElement.getAttribute('dir') === 'rtl';
-  </script>
+          window.isRTL = document.documentElement.getAttribute('dir') === 'rtl';
+    </script>
 
-  {%- if request.page_type contains 'customers/' -%}
-    <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
-  {%- endif -%}
+    {%- if request.page_type contains 'customers/' -%}
+      <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+    {%- endif -%}
 
-  <!-- Theme Javascript ============================================================== -->
-  <script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+    <!-- Theme Javascript ============================================================== -->
 
-  <script>
-    (function () {
-      function onPageShowEvents() {
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(initCartEvent, { timeout: 500 })
-        } else {
-          initCartEvent()
-        }
-        function initCartEvent(){
-          window.fetch(window.theme.routes.cart + '.js')
-          .then((response) => {
-            if(!response.ok){
-              throw {status: response.statusText};
-            }
-            return response.json();
-          })
-          .then((response) => {
-            document.dispatchEvent(new CustomEvent('theme:cart:change', {
-              detail: {
-                cart: response,
-              },
-              bubbles: true,
-            }));
-            return response;
-          })
-          .catch((e) => {
-            console.error(e);
-          });
+
+    <script>
+      function onPageShowEvents(event) {
+        if (event.persisted) {
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(initCartEvent, { timeout: 4000 })
+          } else {
+            setTimeout(initCartEvent, 2500);
+          }
         }
       };
+      
+      function initCartEvent(){
+        window.fetch(window.theme.routes.cart + '.js')
+        .then((response) => {
+          if(!response.ok){
+            throw {status: response.statusText};
+          }
+          return response.json();
+        })
+        .then((response) => {
+          document.dispatchEvent(new CustomEvent('theme:cart:change', {
+            detail: {
+              cart: response,
+            },
+            bubbles: true,
+          }));
+          return response;
+        })
+        .catch((e) => {
+          console.error(e);
+        });
+      }
+
       window.onpageshow = onPageShowEvents;
-    })();
-  </script>
+          })();
+    </script>
 
-  <script type="text/javascript">
-    if (window.MSInputMethodContext && document.documentMode) {
-      var scripts = document.getElementsByTagName('script')[0];
-      var polyfill = document.createElement("script");
-      polyfill.defer = true;
-      polyfill.src = "{{ 'ie11.js' | asset_url }}";
+    {% comment %}
+      IE11 polyfill removed for performance.
+      Modern browsers do not need this blocking script.
+    {% endcomment %}
 
-      scripts.parentNode.insertBefore(polyfill, scripts);
-    }
-  </script>
-
-  <!-- Shopify app scripts =========================================================== -->
-  {{ content_for_header }}
- <script>
+    <!-- Shopify app scripts =========================================================== -->
+    {{ content_for_header }}
+    <script>
         // this is to override protection of fetch by another script
         (function() {
           const originalFetch = window.fetch; // Save your own copy
@@ -243,65 +272,131 @@
               writable: false,
               configurable: false
             });
-          console.log("Attempted to protect window.fetch from global overrides.");
+          // console.log("Attempted to protect window.fetch from global overrides.");
           } catch (e) {
-            console.warn("Could not protect window.fetch globally (it might have already been modified or protected by another script):", e.message);
+            // console.warn("Could not protect window.fetch globally (it might have already been modified or protected by another script):", e.message);
           }
       })();
     </script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"></script> 
-  
-  {% render 'cashfree' %}
-</head>
+    <!-- jQuery and Slick carousel lazy-loaded for better performance -->
+    <script>
+          // Lazy-load jQuery and Slick only when needed
+          window.loadSlickCarousel = function(callback) {
+      if (window.jQuery && window.jQuery.fn && window.jQuery.fn.slick) {
+        callback && callback();
+        return;
+      }
+      
+      // Load jQuery first
+      var jq = document.createElement('script');
+      jq.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js';
+      jq.onload = function() {
+        // Then load Slick CSS
+        var slickCss = document.createElement('link');
+        slickCss.rel = 'stylesheet';
+        slickCss.href = 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css';
+        document.head.appendChild(slickCss);
+        
+        var slickTheme = document.createElement('link');
+        slickTheme.rel = 'stylesheet';  
+        slickTheme.href = 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css';
+        document.head.appendChild(slickTheme);
+        
+        // Then Slick JS
+        var slickJs = document.createElement('script');
+        slickJs.src = 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js';
+        slickJs.onload = callback;
+        document.body.appendChild(slickJs);
+      };
+      document.body.appendChild(jq);
+          };
+
+          // Auto-load if slick elements exist on page
+          document.addEventListener('DOMContentLoaded', function() {
+      if (document.querySelector('.slick-slider, [data-slick]')) {
+        window.loadSlickCarousel();
+      }
+          });
+    </script>
+
+    {% render 'cashfree' %}
+  </head>
 
 
-<body id="{{ page_title | handle }}" class="preloader_content template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }} {{ settings.default_background }}{% if customer %} customer-logged-in{% endif %}">
+  <body id="{{ page_title | handle }}" class="preloader_content template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }} {{ settings.default_background }}{% if customer %} customer-logged-in{% endif %}">
 
     {% comment %} <div class="preloader_class prelaoder_black bg-black h-[2px] w-full fixed top-0 left-0 z-[200] duration-500 transition-all opacity-0"></div>
-    <div class="preloader_class prelaoder_content fixed z-[1000] h-screen w-full top-0 bg-black overflow-clip flex items-center justify-center animate-page-load">
-      <div class="preloader_class absolute bottom-0 bg-neutral-100 z-10 animate-overlay-load w-full"></div>
-      <div class="preloader_class overflow-hidden bg-transparent w-fit h-fit z-20 mix-blend-difference">
-        <div class="preloader_class w-[300px] sm:w-[500px] animate-logo-load">
-          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 744.04 78.22" xml:space="preserve" style="fill:white"><style type="text/css">
-                      .st0 { stroke: #231F20; stroke-miterlimit: 10; }
-                      .st1 { fill: #FFFFFF; }
-                      .st2 { font-family: 'TacticSans-Bld'; }
-                      .st3 { font-size: 22.8366px; }
-                  </style><g><path d="M21.62,77.69C6.91,77.69,0,70.89,0,56.07V21.31C0,6.49,6.91-0.31,21.62-0.31H54.6c14.71,0,21.62,6.8,21.62,21.62v9.14h-18.5v-5.57c0-6.8-2.34-9.14-9.14-9.14H28.3c-6.68,0-9.14,2.34-9.14,9.14v27.63c0,6.8,2.45,9.14,9.14,9.14h20.28c6.8,0,9.14-2.34,9.14-9.14v-6.35h18.5v9.92c0,14.82-6.91,21.62-21.62,21.62H21.62z"></path><path d="M243.7,77.69l-5.68-14.37h-37.55l-5.68,14.37H174.5l34.54-78h21.51l34.43,78H243.7z M206.15,49.05h26.19l-13.15-32.76L206.15,49.05z"></path><path d="M279.98,77.69v-78h54.15c13.71,0,19.39,5.57,19.39,19.39v14.71c0,13.82-5.68,19.39-19.39,19.39h-34.99v24.51H279.98z M299.15,38.91h27.52c5.91,0,7.69-1.89,7.69-7.8v-8.69c0-5.91-1.78-7.8-7.69-7.8h-27.52V38.91z"></path><path d="M434.56-0.31v16.94h-26.97v61.06h-19.17V16.63h-26.97V-0.31H434.56z"></path><path d="M462.93,61.87h47.47v15.82h-66.63v-78h65.52v15.82h-46.35v14.82h41.9v14.49h-41.9V61.87z"></path><path d="M602.28,77.69h-20.95L563.28,50.5h-18.72v27.19H525.4v-78h54.15c13.71,0,19.39,5.57,19.39,19.39v10.7c0,12.59-4.9,18.39-16.16,19.28L602.28,77.69z M544.56,13.95v22.73h27.52c5.91,0,7.69-1.89,7.69-7.8v-7.13c0-5.91-1.78-7.8-7.69-7.8H544.56z"></path><g><g><path d="M694.37,77.69h-70.09V52.51c0-11.14,5.01-15.6,16.71-17.38l29.86-4.46c4.57-0.78,6.24-2.23,6.24-6.69v-3.12c0-4.79-1.45-6.24-6.24-6.24h-20.95c-4.79,0-6.24,1.45-6.24,6.24v2.9h-17.83v-7.35c0-11.59,5.24-16.71,16.71-16.71h36.33c11.48,0,16.71,5.13,16.71,16.71v10.92c0,11.14-5.01,15.6-16.71,17.38l-29.86,4.46c-4.79,0.78-6.24,2.23-6.24,6.69v6.24h51.59V77.69z"></path></g></g><path d="M91.83-0.31h16.07v78H91.83V-0.31z"></path><path d="M128.91-0.31h30.59v78h-30.59V-0.31z"></path></g><text transform="matrix(1 0 0 1 708.8715 16.2942)" class="st2 st3">TM</text></svg>
-        </div>
-      </div>
-    </div> {% endcomment %}
-  <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+                                              <div class="preloader_class prelaoder_content fixed z-[1000] h-screen w-full top-0 bg-black overflow-clip flex items-center justify-center animate-page-load">
+                                                <div class="preloader_class absolute bottom-0 bg-neutral-100 z-10 animate-overlay-load w-full"></div>
+                                                <div class="preloader_class overflow-hidden bg-transparent w-fit h-fit z-20 mix-blend-difference">
+                                                  <div class="preloader_class w-[300px] sm:w-[500px] animate-logo-load">
+                                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 744.04 78.22" xml:space="preserve" style="fill:white"><style type="text/css">
+                                                                .st0 { stroke: #231F20; stroke-miterlimit: 10; }
+                                                                .st1 { fill: #FFFFFF; }
+                                                                .st2 { font-family: 'TacticSans-Bld'; }
+                                                                .st3 { font-size: 22.8366px; }
+                                                            </style><g><path d="M21.62,77.69C6.91,77.69,0,70.89,0,56.07V21.31C0,6.49,6.91-0.31,21.62-0.31H54.6c14.71,0,21.62,6.8,21.62,21.62v9.14h-18.5v-5.57c0-6.8-2.34-9.14-9.14-9.14H28.3c-6.68,0-9.14,2.34-9.14,9.14v27.63c0,6.8,2.45,9.14,9.14,9.14h20.28c6.8,0,9.14-2.34,9.14-9.14v-6.35h18.5v9.92c0,14.82-6.91,21.62-21.62,21.62H21.62z"></path><path d="M243.7,77.69l-5.68-14.37h-37.55l-5.68,14.37H174.5l34.54-78h21.51l34.43,78H243.7z M206.15,49.05h26.19l-13.15-32.76L206.15,49.05z"></path><path d="M279.98,77.69v-78h54.15c13.71,0,19.39,5.57,19.39,19.39v14.71c0,13.82-5.68,19.39-19.39,19.39h-34.99v24.51H279.98z M299.15,38.91h27.52c5.91,0,7.69-1.89,7.69-7.8v-8.69c0-5.91-1.78-7.8-7.69-7.8h-27.52V38.91z"></path><path d="M434.56-0.31v16.94h-26.97v61.06h-19.17V16.63h-26.97V-0.31H434.56z"></path><path d="M462.93,61.87h47.47v15.82h-66.63v-78h65.52v15.82h-46.35v14.82h41.9v14.49h-41.9V61.87z"></path><path d="M602.28,77.69h-20.95L563.28,50.5h-18.72v27.19H525.4v-78h54.15c13.71,0,19.39,5.57,19.39,19.39v10.7c0,12.59-4.9,18.39-16.16,19.28L602.28,77.69z M544.56,13.95v22.73h27.52c5.91,0,7.69-1.89,7.69-7.8v-7.13c0-5.91-1.78-7.8-7.69-7.8H544.56z"></path><g><g><path d="M694.37,77.69h-70.09V52.51c0-11.14,5.01-15.6,16.71-17.38l29.86-4.46c4.57-0.78,6.24-2.23,6.24-6.69v-3.12c0-4.79-1.45-6.24-6.24-6.24h-20.95c-4.79,0-6.24,1.45-6.24,6.24v2.9h-17.83v-7.35c0-11.59,5.24-16.71,16.71-16.71h36.33c11.48,0,16.71,5.13,16.71,16.71v10.92c0,11.14-5.01,15.6-16.71,17.38l-29.86,4.46c-4.79,0.78-6.24,2.23-6.24,6.69v6.24h51.59V77.69z"></path></g></g><path d="M91.83-0.31h16.07v78H91.83V-0.31z"></path><path d="M128.91-0.31h30.59v78h-30.59V-0.31z"></path></g><text transform="matrix(1 0 0 1 708.8715 16.2942)" class="st2 st3">TM</text></svg>
+                                                  </div>
+                                                </div>
+                                </div> {% endcomment %}
+    <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
 
-  {% sections 'group-header' %}
-  {% sections 'group-overlay' %}
+    {% sections 'group-header' %}
+    {% sections 'group-overlay' %}
 
-  <main class="main-content" id="MainContent">
-    {{ content_for_layout }}
-  </main>
+    <main class="main-content" id="MainContent">
+      {{ content_for_layout }}
+    </main>
 
-  {% sections 'group-footer' %}
+    {% sections 'group-footer' %}
 
-  <div class="search--popdown">
-    {% render 'search-predictive', version: 'search-popdown' %}
-  </div>
+    <div class="search--popdown">
+      {% render 'search-predictive'
+        , version: 'search-popdown' %}
+    </div>
 
-  <div data-modal-container></div>
+    <div data-modal-container></div>
 
-  {%- comment -%}
-    In order to use your custom javascript file at assets/custom.js
-    just cut and paste this next line outside this comment.
-    <script src="{{ 'custom.js' | asset_url }}" defer="defer"></script>
-  {%- endcomment -%}
+    {%- comment -%}
+      In order to use your custom javascript file at assets/custom.js
+      just cut and paste this next line outside this comment.
+      <script src="{{ 'custom.js' | asset_url }}" defer="defer"></script>
+    {%- endcomment -%}
 
-  <!-- Paste popup code or third party scripts below this comment line ============== -->
-
-
-  <!-- And above this comment line ================================================== -->
+    <!-- Paste popup code or third party scripts below this comment line ============== -->
 
 
-</body>
+    <!-- And above this comment line ================================================== -->
+
+
+    <script>
+          // Optimized Video Autoplay - Only play when visible to save bandwidth/battery
+          document.addEventListener("DOMContentLoaded", function() {
+      var lazyVideos = [].slice.call(document.querySelectorAll("video.js-video-autoplay, video[data-autoplay-on-scroll]"));
+
+      if ("IntersectionObserver" in window) {
+        var lazyVideoObserver = new IntersectionObserver(function(entries, observer) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              if (entry.target.paused) {
+                  entry.target.play().catch(function(e) { /* console.log('Autoplay prevented:', e); */ });
+              }
+            } else {
+               if (!entry.target.paused) {
+                  entry.target.pause();
+               }
+            }
+          });
+        }, { threshold: 0.25 }); // Play when 25% visible
+
+        lazyVideos.forEach(function(lazyVideo) {
+          lazyVideoObserver.observe(lazyVideo);
+        });
+      }
+          });
+    </script>
+    <!-- Theme Javascript moved to footer for performance -->
+    <script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+  </body>
 </html>

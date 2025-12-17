@@ -269,48 +269,56 @@
 
     // custom work
 
+    // custom work
     const controller = new AbortController();
-const timeout = setTimeout(() => controller.abort(), 2000);
+    const timeout = setTimeout(() => controller.abort(), 2000);
 
-const countryFunction = fetch(
-  window?.Shopify?.routes?.root +
-    "browsing_context_suggestions.json" +
-    "?country[enabled]=true" +
-    `&country[exclude]=${window?.Shopify?.country}` +
-    "&language[enabled]=true" +
-    `&language[exclude]=${window?.Shopify?.language}`,
-  {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    signal: controller.signal,
-  }
-)
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response.json();
-  })
-  .then((data) => {
-    clearTimeout(timeout);
-    const countryName = data?.detected_values?.country?.name;
-    if (
-      countryName === "India"
-    ) {
-       automateThemeSetup();
-      initEventListeners();
-    }
-  })
-  .catch((err) => {
-    clearTimeout(timeout);
-    console.log("Error in fetching country data :: ", err);
-  })
+    const countryFunction = () => { // Wrapped in a function
+      fetch(
+        window?.Shopify?.routes?.root +
+          "browsing_context_suggestions.json" +
+          "?country[enabled]=true" +
+          `&country[exclude]=${window?.Shopify?.country}` +
+          "&language[enabled]=true" +
+          `&language[exclude]=${window?.Shopify?.language}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          signal: controller.signal,
+        }
+      )
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          clearTimeout(timeout);
+          const countryName = data?.detected_values?.country?.name;
+          if (
+            countryName === "India"
+          ) {
+             automateThemeSetup();
+            initEventListeners();
+          }
+        })
+        .catch((err) => {
+          clearTimeout(timeout);
+          // console.log("Error in fetching country data :: ", err);
+        })
+    };
 
-  window.addEventListener("DOMContentLoaded", countryFunction);
+    // Defer country detection until after page is interactive for better performance
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(function() { countryFunction(); }, { timeout: 2000 });
+    } else {
+      window.addEventListener('load', function() { setTimeout(countryFunction, 500); });
+    }
   } catch (err) {
-  console.error(`Error in doing automated theme setup :: ${err?.message}`);
+    // console.error(`Error in doing automated theme setup :: ${err?.message}`);
   }
 </script>
 

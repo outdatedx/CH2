@@ -32,13 +32,14 @@
   <div class="{{ section.settings.width }} section-padding">
     <div class="aspect-video relative">
       {%- if external_video -%}
-        <iframe
-          class="block absolute top-0 right-0 bottom-0 left-0 w-full h-full"
-          src="{{ video_url }}"
-          frameborder="0"
-          allow="fullscreen"
-          allowfullscreen>
-        </iframe>
+          <iframe
+            class="block absolute top-0 right-0 bottom-0 left-0 w-full h-full"
+            src="{{ video_url }}"
+            frameborder="0"
+            title="Embedded video player"
+            allow="fullscreen"
+            allowfullscreen>
+          </iframe>
       {%- elsif html_video != blank -%}
         {{ html_video | video_tag: controls: true, preload: 'none', image_size: image_size, class: 'block absolute top-0 right-0 bottom-0 left-0 w-full h-full' }}
       {%- endif -%}
